@@ -1,6 +1,6 @@
-# MayaProtect - Microservice <INSERT NAME>
+# MayaProtect - Microservice PostHiveEvent
 
-<Microservice description>
+Completion of events manually on the hives
 <Last build info>
 
 ## How to build
@@ -8,7 +8,7 @@
 ## Usage
 
 ## Contributors
-<firstname> <lastname> - <email>
+Samir Ardjouni - samir.ardjouni@gmail.com
 
 ## Licence
 

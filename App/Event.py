@@ -9,14 +9,13 @@ app = Flask(__name__)
 CORS(app)
 
 host = os.environ.get("MONGO_HOST", "localhost")
-port = 27017
+port = int(os.environ.get("MONGO_PORT", 27017))
 
 client = MongoClient(host, port)
 
-db = client['mayaprotect']
+db = client[os.environ.get("MONGO_DB", 'mayaprotect')]
 
 col = db['hives']
-
 
 @cross_origin()
 @app.route('/')

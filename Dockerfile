@@ -12,4 +12,4 @@ ENV MONGO_DB=mayaprotect
 
 EXPOSE 8080
 
-CMD python show_all_lists.py
+CMD python App/Event.py

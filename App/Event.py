@@ -18,12 +18,6 @@ db = client[os.environ.get("MONGO_DB", 'mayaprotect')]
 col = db['hives']
 
 @cross_origin()
-@app.route('/')
-def hello():
-    return "Hello in my teams!"
-
-
-@cross_origin()
 @app.route('/hive/<hive_id>', methods=['POST'])
 def update_hive_event(hive_id):
     data = request.get_json()
@@ -33,4 +27,4 @@ def update_hive_event(hive_id):
     return flask.Response(status=201)
 
 
-app.run(host="0.0.0.0", port=9001, debug=True)
+app.run(host="0.0.0.0", port=8080, debug=True)

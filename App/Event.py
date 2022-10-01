@@ -18,7 +18,7 @@ db = client[os.environ.get("MONGO_DB", 'mayaprotect')]
 col = db['hives']
 
 @cross_origin()
-@app.route('/hives/<hive_id>', methods=['PUT'])
+@app.route('/hives/<hive_id>/events', methods=['PUT'])
 def update_hive_event(hive_id):
     data = request.get_json()
     update_selector = {'uuid': bson.Binary.from_uuid(UUID(hive_id))}

@@ -1,1 +1,1 @@
-from App.Event import Event
+from App.app import PutHiveEvent

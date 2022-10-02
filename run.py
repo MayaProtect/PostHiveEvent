@@ -5,7 +5,7 @@ def main():
     params = {
         'mongo_host': env.get('MONGO_HOST', 'localhost'),
         'mongo_port': int(env.get('MONGO_PORT', 27017)),
-        'mongo_db': env.get('MONGO_DB', 'hives')
+        'mongo_db': env.get('MONGO_DB', 'mayaprotect')
     }
     app = PutHiveEvent(params)
     app.run()

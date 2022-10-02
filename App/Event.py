@@ -1,9 +1,10 @@
 from uuid import UUID
 import bson
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
 import os
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -23,8 +24,15 @@ def update_hive_event(hive_id):
     data = request.get_json()
     update_selector = {'uuid': bson.Binary.from_uuid(UUID(hive_id))}
     update_data = {'$push': {'events': [data]}}
-    result = col.update_one(update_selector, update_data)
-    return flask.Response(status=201)
+    try:
+        result = col.update_one(update_selector, update_data)
+        if (result is None):
+            message = {'message': 'Hive not found', 'status': 404}
+            return Response(json.dumps(message), status=404)
+        return Response(status=201)
+    except Exception as e:
+        message = {'message': 'Error updating hive, ' + str(e), 'status': 500}
+        return Response(json.dumps(message), status=500)
 
 
 app.run(host="0.0.0.0", port=8080, debug=True)

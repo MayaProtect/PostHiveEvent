@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metricsfaker
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: posthiveevent
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: posthiveevent
+    spec:
+      containers:
+        - name: posthiveevent
+          image: pfontaine/posthiveevent:{{ commit_sha }}
+          env:
+            - name: MONGO_HOST
+              value: mongodevel
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_DB
+              value: mayaprotect
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: posthiveevent-service
+  namespace: development
+spec:
+  selector:
+    app: posthiveevent
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: ClusterIP
